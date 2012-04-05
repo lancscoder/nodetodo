@@ -1,0 +1,47 @@
+#todoapp
+    header
+        h1 Todos
+        input#new-todo(type='text', placeholder='What needs to be done?')
+
+    section#main
+        input#toggle-all(type='checkbox')
+        label(for='toggle-all') Mark all as complete
+        ul#todo-list
+
+    footer
+        a#clear-completed Clear completed
+        #todo-count
+
+#instructions
+    | Double-click to edit a todo 
+
+#credits
+    | Created by
+    | <br />
+    | <a href="http://jgn.me/">J&eacute;r&ocirc;me Gravel-Niquet</a>.
+    | <br />Rewritten by: <a href="http://addyosmani.github.com/todomvc">TodoMVC</a>
+    | <br />Rewritten again to implement Node.js by: <a href="">Lancscoder</a>.
+
+script(src='/javascripts/json2.js')
+script(src='/javascripts/jquery-1.7.1.js')
+script(src='/javascripts/underscore-1.3.1.js')
+script(src='/javascripts/backbone.js')
+script(src='/javascripts/backbone-localstorage.js')
+script(src='/javascripts/todos.js')
+
+// Templates
+
+script(type='text/template', id='item-template')
+    .view.
+        <input class="toggle" type="checkbox" <%= done ? 'checked="checked"' : '' %> />
+        <label><%= title %></label>
+        <a class="destroy"></a>
+    input.edit(type='text', value='<%= title %>')
+
+script(type='text/template', id='stats-template')
+    <% if (done) { %>
+    a#clear-completed Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %>
+    <% } %>
+    div.todo-count
+        b <%= remaining %>
+        <%= remaining == 1 ? 'item' : 'items' %> left
